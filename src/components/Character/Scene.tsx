@@ -130,6 +130,21 @@ const Scene = () => {
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
+        if (character) {
+          character.traverse((child) => {
+            if (child instanceof THREE.Mesh) {
+              child.geometry.dispose();
+              if (Array.isArray(child.material)) {
+                child.material.forEach((material) => material.dispose());
+              } else {
+                child.material.dispose();
+              }
+            }
+          });
+        }
+        if (scene.environment) {
+          scene.environment.dispose();
+        }
         window.removeEventListener("resize", () =>
           handleResize(renderer, camera, canvasDiv, character!)
         );

@@ -192,10 +192,6 @@
   font-family: "Geist", sans-serif;
 }
 
-/* .landing-intro h1 span {
-   font-weight: 200; 
-} */
-
 .landing-info {
   position: absolute;
   right: 50%;
@@ -214,18 +210,27 @@
 }
 
 .landing-info h2 {
+  position: absolute;
+  top: 0px;
+  left: -1200px;
+  width: 300px;
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--textColor);
   margin: 0;
-  margin-top: -20px;
-  margin-left: 20px;
-  font-family: "Geist", sans-serif;
-  font-weight: 600;
-  font-size: 32px;
-  line-height: 40px;
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+}
+
+.landing-h2-info {
+  position: relative;
+  right: 0px; /* Modified: Removed the 50px offset to keep text aligned right */
+  width: 100%;
+  text-align: left;
+}
+
+.landing-h2-info-1 {
+  display: none;
 }
 
 .landing-copy {
@@ -384,12 +389,12 @@ h2.landing-info-h2 {
 
   .landing-info {
     bottom: auto;
-    top: 51%;
-    z-index: inherit;
+    top: 42%;            /* Modified: Moved up from 51% to clear the avatar's shoulder/face */
+    z-index: 13;         /* Increased z-index to stay above model effects */
     text-align: left;
     transform: translate(0%, -50%);
     right: auto;
-    left: 66%;
+    left: 72%;           /* Modified: Moved further right from 66% */
   }
 }
 
@@ -403,12 +408,12 @@ h2.landing-info-h2 {
 
   .landing-info {
     bottom: auto;
-    top: 51%;
-    z-index: inherit;
+    top: 32%;            /* Modified: Sync with 1025px height adjustment */
+    z-index: 13;
     text-align: left;
     transform: translate(0%, -50%);
     right: auto;
-    left: 70%;
+    left: 74%;           /* Modified: Adjusted further right for wider screens */
   }
 }
 

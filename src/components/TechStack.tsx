@@ -1,3 +1,4 @@
+import ErrorBoundary from "./ErrorBoundary";
 import { getAssetPath } from "../utils/basePath";
 import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
@@ -12,16 +13,25 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
+import reactImg from "/images/react2.webp";
+import nextImg from "/images/next2.webp";
+import nodeImg from "/images/node2.webp";
+import expressImg from "/images/express.webp";
+import mongoImg from "/images/mongo.webp";
+import mysqlImg from "/images/mysql.webp";
+import typescriptImg from "/images/typescript.webp";
+import javascriptImg from "/images/javascript.webp";
+
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  getAssetPath("images/react2.webp"),
-  getAssetPath("images/next2.webp"),
-  getAssetPath("images/node2.webp"),
-  getAssetPath("images/express.webp"),
-  getAssetPath("images/mongo.webp"),
-  getAssetPath("images/mysql.webp"),
-  getAssetPath("images/typescript.webp"),
-  getAssetPath("images/javascript.webp"),
+  reactImg,
+  nextImg,
+  nodeImg,
+  expressImg,
+  mongoImg,
+  mysqlImg,
+  typescriptImg,
+  javascriptImg,
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
@@ -128,6 +138,21 @@ function Pointer({ vec = new THREE.Vector3(), isActive }: PointerProps) {
 const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
 
+  const materials = useMemo(() => {
+    return textures.map(
+      (texture) =>
+        new THREE.MeshPhysicalMaterial({
+          map: texture,
+          emissive: "#ffffff",
+          emissiveMap: texture,
+          emissiveIntensity: 0.3,
+          metalness: 0.5,
+          roughness: 1,
+          clearcoat: 0.1,
+        })
+    );
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY || document.documentElement.scrollTop;
@@ -150,64 +175,57 @@ const TechStack = () => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      materials.forEach((material) => {
+        material.map?.dispose();
+        material.dispose();
+      });
+      textures.forEach((texture) => texture.dispose());
     };
-  }, []);
-  const materials = useMemo(() => {
-    return textures.map(
-      (texture) =>
-        new THREE.MeshPhysicalMaterial({
-          map: texture,
-          emissive: "#ffffff",
-          emissiveMap: texture,
-          emissiveIntensity: 0.3,
-          metalness: 0.5,
-          roughness: 1,
-          clearcoat: 0.1,
-        })
-    );
-  }, []);
+  }, [materials]);
 
   return (
     <div className="techstack">
       <h2>Tech Stack</h2>
 
-      <Canvas
-        shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
-        camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
-        onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
-        className="tech-canvas"
-      >
-        <ambientLight intensity={1} />
-        <spotLight
-          position={[20, 20, 25]}
-          penumbra={1}
-          angle={0.2}
-          color="white"
-          castShadow
-          shadow-mapSize={[512, 512]}
-        />
-        <directionalLight position={[0, 5, -4]} intensity={2} />
-        <Physics gravity={[0, 0, 0]}>
-          <Pointer isActive={isActive} />
-          {spheres.map((props, i) => (
-            <SphereGeo
-              key={i}
-              {...props}
-              material={materials[Math.floor(Math.random() * materials.length)]}
-              isActive={isActive}
-            />
-          ))}
-        </Physics>
-        <Environment
-          files={getAssetPath("models/char_enviorment.hdr")}
-          environmentIntensity={0.5}
-          environmentRotation={[0, 4, 2]}
-        />
-        <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
-        </EffectComposer>
-      </Canvas>
+      <ErrorBoundary fallback={<p>Could not load tech stack animation.</p>}>
+        <Canvas
+          shadows
+          gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+          camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
+          onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
+          className="tech-canvas"
+        >
+          <ambientLight intensity={1} />
+          <spotLight
+            position={[20, 20, 25]}
+            penumbra={1}
+            angle={0.2}
+            color="white"
+            castShadow
+            shadow-mapSize={[512, 512]}
+          />
+          <directionalLight position={[0, 5, -4]} intensity={2} />
+          <Physics gravity={[0, 0, 0]}>
+            <Pointer isActive={isActive} />
+            {spheres.map((props, i) => (
+              <SphereGeo
+                key={i}
+                {...props}
+                material={materials[Math.floor(Math.random() * materials.length)]}
+                isActive={isActive}
+              />
+            ))}
+          </Physics>
+          <Environment
+            files={getAssetPath("models/char_enviorment.hdr")}
+            environmentIntensity={0.5}
+            environmentRotation={[0, 4, 2]}
+          />
+          <EffectComposer enableNormalPass={false}>
+            <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+          </EffectComposer>
+        </Canvas>
+      </ErrorBoundary>
     </div>
   );
 };

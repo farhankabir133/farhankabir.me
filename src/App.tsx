@@ -1,24 +1,25 @@
 import { lazy, Suspense } from "react";
 import "./App.css";
 
-const CharacterModel = lazy(() => import("./components/Character"));
 const MainContainer = lazy(() => import("./components/MainContainer"));
 import { LoadingProvider } from "./context/LoadingProvider";
+import ErrorBoundary from "./components/ErrorBoundary";
+import LazyCharacter from "./components/LazyCharacter";
 
-const App = () => {
+function App() {
   return (
-    <>
+    <main>
       <LoadingProvider>
-        <Suspense>
+        <Suspense fallback={null}>
           <MainContainer>
-            <Suspense>
-              <CharacterModel />
-            </Suspense>
+            <ErrorBoundary fallback={<p>Something went wrong with the 3D model.</p>}>
+              <LazyCharacter />
+            </ErrorBoundary>
           </MainContainer>
         </Suspense>
       </LoadingProvider>
-    </>
+    </main>
   );
-};
+}
 
 export default App;

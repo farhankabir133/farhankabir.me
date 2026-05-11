@@ -25,7 +25,7 @@ const setCharacter = (
 
         let character: THREE.Object3D;
         loader.load(
-          blobUrl,
+    blobUrl,
           async (gltf) => {
             character = gltf.scene;
             await renderer.compileAsync(character, camera, scene);
@@ -52,6 +52,12 @@ const setCharacter = (
               }
             });
             resolve(gltf);
+            // Clean up the temporary blob URL to avoid leaking
+            try {
+              URL.revokeObjectURL(blobUrl);
+            } catch (e) {
+              // ignore revoke errors
+            }
             setCharTimeline(character, camera);
             setAllTimeline();
             character!.getObjectByName("footR")!.position.y = 3.36;
@@ -64,6 +70,12 @@ const setCharacter = (
           undefined,
           (error) => {
             console.error("Error loading GLTF model:", error);
+            // Ensure blob URL is revoked on error as well
+            try {
+              URL.revokeObjectURL(blobUrl);
+            } catch (e) {
+              // ignore revoke errors
+            }
             reject(error);
           }
         );

@@ -3,15 +3,11 @@
  * This handles both localhost (/) and GitHub Pages (/farhankabir.me/)
  */
 export const getBasePath = (): string => {
-  // In development, base is /
-  // In production on GitHub Pages, base is /farhankabir.me/
-  if (import.meta.env.DEV) {
-    return '/';
-  }
-  
-  // For GitHub Pages, we use the configured base from Vite
-  // This is replaced at build time with the actual base path
-  return import.meta.env.BASE_URL;
+  // Prefer Vite's BASE_URL which reflects the configured `base` both in dev and prod.
+  // Fallback to '/' when it's not available for any reason.
+  // Vite exposes the base at import.meta.env.BASE_URL and it will be '/' in a normal
+  // dev setup or '/your-repo/' when the dev server is started with that base.
+  return (import.meta.env.BASE_URL as string) || '/';
 };
 
 /**
