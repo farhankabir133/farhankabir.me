@@ -1,5 +1,6 @@
 import React, { Suspense, useRef, useState, useEffect } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import { useLoading } from "../context/LoadingProvider";
 
 const CharacterModel = React.lazy(() => import("./Character"));
 
@@ -7,6 +8,7 @@ const LazyCharacter = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isVisible = useIntersectionObserver(ref, { threshold: 0.1 });
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  const { setIsLoading } = useLoading();
 
   useEffect(() => {
     const handleResize = () => {
@@ -15,6 +17,17 @@ const LazyCharacter = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // On mobile, complete loading immediately and skip 3D character
+  useEffect(() => {
+    if (isMobile) {
+      // Simulate loading completion for mobile users
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile, setIsLoading]);
 
   // Skip 3D character on mobile devices
   if (isMobile) {
