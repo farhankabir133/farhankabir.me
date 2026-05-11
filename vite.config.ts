@@ -9,5 +9,19 @@ export default defineConfig({
     target: "ES2020",
     outDir: "dist",
     sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          three: ["three"],
+          gsap: ["gsap"],
+          reactThree: ["@react-three/fiber", "@react-three/drei"],
+        },
+      },
+    },
+  },
+  server: {
+    headers: {
+      "Cache-Control": "public, max-age=3600",
+    },
   },
 });
