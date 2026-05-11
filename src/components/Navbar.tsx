@@ -3,6 +3,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HoverLinks from "./HoverLinks";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { navigationItems, siteProfile } from "../data/portfolio";
 import "./styles/Navbar.css";
 
 gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -43,33 +44,25 @@ const Navbar = () => {
     <>
       <div className="header">
         <a href="/#" className="navbar-title" data-cursor="disable">
-          AM
+          FK
         </a>
         <a
-          href="https://www.linkedin.com/in/akashrmalhotra/"
+          href={`mailto:${siteProfile.secondaryEmail}`}
           className="navbar-connect"
           data-cursor="disable"
           target="_blank"
           rel="noreferrer"
         >
-          linkedin.com/in/akashrmalhotra
+          {siteProfile.secondaryEmail}
         </a>
         <ul>
-          <li>
-            <a data-href="#about" href="#about">
-              <HoverLinks text="ABOUT" />
-            </a>
-          </li>
-          <li>
-            <a data-href="#work" href="#work">
-              <HoverLinks text="WORK" />
-            </a>
-          </li>
-          <li>
-            <a data-href="#contact" href="#contact">
-              <HoverLinks text="CONTACT" />
-            </a>
-          </li>
+          {navigationItems.map((item) => (
+            <li key={item.label}>
+              <a data-href={item.href} href={item.href}>
+                <HoverLinks text={item.label.toUpperCase()} />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 

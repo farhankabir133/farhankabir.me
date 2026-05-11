@@ -1,13 +1,13 @@
 import {
+  FaFacebookF,
   FaGithub,
   FaInstagram,
   FaLinkedinIn,
-  FaYoutube,
 } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
 import { useEffect } from "react";
-import HoverLinks from "./HoverLinks";
+import { socialLinks, siteProfile } from "../data/portfolio";
 
 const SocialIcons = () => {
   useEffect(() => {
@@ -60,49 +60,33 @@ const SocialIcons = () => {
     <div className="icons-section">
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
-          <a
-            href="https://github.com/akashrmalhotra"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={socialLinks[1].href} target="_blank" rel="noreferrer">
             <FaGithub />
           </a>
         </span>
         <span>
-          <a
-            href="https://www.linkedin.com/in/akashrmalhotra/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={socialLinks[3].href} target="_blank" rel="noreferrer">
             <FaLinkedinIn />
           </a>
         </span>
         <span>
-          <a
-            href="https://www.youtube.com/@Leftbraincoder"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <FaYoutube />
+          <a href={socialLinks[0].href} target="_blank" rel="noreferrer">
+            <FaFacebookF />
           </a>
         </span>
         <span>
-          <a
-            href="https://www.instagram.com/leftbraincoder/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href={socialLinks[2].href} target="_blank" rel="noreferrer">
             <FaInstagram />
           </a>
         </span>
       </div>
       <a
         className="resume-button"
-        href="/Akash_Malhotra.pdf"
+        href={siteProfile.resumeUrl}
         target="_blank"
         rel="noreferrer"
       >
-        <HoverLinks text="RESUME" />
+        RESUME
         <span>
           <TbNotes />
         </span>

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { skillCards } from "../data/portfolio";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -25,12 +26,12 @@ const WhatIDo = () => {
     };
   }, []);
   return (
-    <div className="whatIDO">
+    <div className="whatIDO" id="skills">
       <div className="what-box">
         <h2 className="title">
-          W<span className="hat-h2">HAT</span>
+          S<span className="hat-h2">KILLS</span>
           <div>
-            I<span className="do-h2"> DO</span>
+            &amp;<span className="do-h2"> EXPERTISE</span>
           </div>
         </h2>
       </div>
@@ -87,19 +88,18 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>MULTI-AGENTIC LLM PIPELINES</h3>
-              <h4>Scalable AI Agents & RAG</h4>
+              <h3>{skillCards[0].title.toUpperCase()}</h3>
+              <h4>{skillCards[0].eyebrow}</h4>
               <p>
-                Building specialized AI agent ecosystems and RAG pipelines for complex analysis, automated scanning, and natural language database querying.
+                {skillCards[0].description}
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">RAG & Agentic-RAG</div>
-                <div className="what-tags">Agno & Crew AI</div>
-                <div className="what-tags">LangChain</div>
-                <div className="what-tags">Qwen & Claude</div>
-                <div className="what-tags">Vector DBs</div>
-                <div className="what-tags">GuardRails</div>
+                {skillCards[0].tags.map((tag) => (
+                  <div className="what-tags" key={tag}>
+                    {tag}
+                  </div>
+                ))}
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -123,20 +123,18 @@ const WhatIDo = () => {
             </div>
             <div className="what-corner"></div>
             <div className="what-content-in">
-              <h3>COMPUTER VISION & EDGE COMPUTING</h3>
-              <h4>Optimized Edge AI Solutions</h4>
+              <h3>{skillCards[1].title.toUpperCase()}</h3>
+              <h4>{skillCards[1].eyebrow}</h4>
               <p>
-                Developing end-to-end CV pipelines for object detection, tracking, and OCR, optimized for edge devices like Jetson AGX to run at production scale.
+                {skillCards[1].description}
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">PyTorch</div>
-                <div className="what-tags">YOLO & DeTR</div>
-                <div className="what-tags">TensorRT & CUDA</div>
-                <div className="what-tags">DeepStream</div>
-                <div className="what-tags">FastAPI</div>
-                <div className="what-tags">Python</div>
-                <div className="what-tags">Docker & K8S</div>
+                {skillCards[1].tags.map((tag) => (
+                  <div className="what-tags" key={tag}>
+                    {tag}
+                  </div>
+                ))}
               </div>
               <div className="what-arrow"></div>
             </div>

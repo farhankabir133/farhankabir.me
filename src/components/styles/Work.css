@@ -107,6 +107,35 @@
   font-size: 15px;
 }
 
+.carousel-summary {
+  margin: 8px 0 0;
+  color: #e5e7eb;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.project-links a {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.project-links a:hover {
+  color: var(--accentColor);
+  border-color: var(--accentColor);
+}
+
 .carousel-image-wrapper {
   flex: 1;
   display: flex;
@@ -315,6 +344,10 @@
 
   .carousel-details h4 {
     font-size: 20px;
+  }
+
+  .carousel-summary {
+    font-size: 14px;
   }
 
   .carousel-content {

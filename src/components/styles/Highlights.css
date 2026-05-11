@@ -1,0 +1,156 @@
+.highlights-section {
+  margin: 120px auto 80px;
+  padding-bottom: 40px;
+}
+
+.highlights-header {
+  margin-bottom: 40px;
+}
+
+.highlights-header h2 {
+  font-size: 64px;
+  line-height: 0.95;
+  font-weight: 500;
+  margin: 0 0 16px;
+  color: #f3f4f6;
+}
+
+.highlights-header p {
+  max-width: 720px;
+  margin: 0;
+  color: #adacac;
+  font-size: 18px;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.highlights-panel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 28px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.015)
+  );
+  backdrop-filter: blur(10px);
+}
+
+.highlights-panel h3 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.highlight-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.highlight-stack-tight {
+  gap: 14px;
+}
+
+.highlight-quote,
+.highlight-post {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.highlight-quote img,
+.highlight-post img {
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 18px;
+}
+
+.highlight-quote p,
+.highlight-post p {
+  margin: 0;
+  color: #d1d5db;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.highlight-quote h4,
+.highlight-post h4 {
+  margin: 0 0 6px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.highlight-quote span,
+.highlight-meta {
+  display: block;
+  margin-bottom: 8px;
+  color: #8f98a3;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.highlight-post a {
+  display: inline-flex;
+  margin-top: 12px;
+  color: var(--accentColor);
+  font-weight: 500;
+}
+
+.highlight-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.highlight-tags span {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+@media only screen and (max-width: 1200px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlights-header h2 {
+    font-size: 48px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .highlights-section {
+    margin-top: 80px;
+  }
+
+  .highlights-panel {
+    padding: 20px;
+  }
+
+  .highlight-quote,
+  .highlight-post {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .highlight-quote img,
+  .highlight-post img {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .highlights-header h2 {
+    font-size: 38px;
+  }
+}

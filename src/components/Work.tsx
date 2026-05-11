@@ -2,37 +2,7 @@ import { useState, useCallback } from "react";
 import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
-
-const projects = [
-  {
-    title: "BeSpoke Technologies",
-    category: "AI-Powered Beauty Platform",
-    tools: "GCP Cloud Functions, MobileNet/ResNet, Custom Tools, RAG",
-    image: "/images/callhq.png",
-    link: "#",
-  },
-  {
-    title: "HakiSense",
-    category: "Agentic AI Quantitative Analysis",
-    tools: "20+ specialized agents, Custom Tools, RAG Pipelines",
-    image: "/images/whatsapp.png",
-    link: "#",
-  },
-  {
-    title: "Fortune 50 Client Acquisition",
-    category: "Scalable Production System",
-    tools: "Edge Devices, Model Optimization",
-    image: "/images/broki.png",
-    link: "#",
-  },
-  {
-    title: "AI Community Leadership",
-    category: "Online AI Community",
-    tools: "8,000+ members, Deep Learning Projects",
-    image: "/images/orrdr.png",
-    link: "#",
-  },
-];
+import { projects } from "../data/portfolio";
 
 const Work = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,7 +34,7 @@ const Work = () => {
     <div className="work-section" id="work">
       <div className="work-container section-container">
         <h2>
-          My <span>Work</span>
+          Featured <span>Work</span>
         </h2>
 
         <div className="carousel-wrapper">
@@ -106,9 +76,25 @@ const Work = () => {
                         <p className="carousel-category">
                           {project.category}
                         </p>
+                        <p className="carousel-summary">
+                          {project.description}
+                        </p>
                         <div className="carousel-tools">
                           <span className="tools-label">Tools & Features</span>
                           <p>{project.tools}</p>
+                        </div>
+                        <div className="project-links">
+                          {project.links.map((link) => (
+                            <a
+                              key={link.label}
+                              href={link.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              data-cursor="disable"
+                            >
+                              {link.label}
+                            </a>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -116,7 +102,7 @@ const Work = () => {
                       <WorkImage
                         image={project.image}
                         alt={project.title}
-                        link={project.link}
+                        link={project.links[0]?.href}
                       />
                     </div>
                   </div>
