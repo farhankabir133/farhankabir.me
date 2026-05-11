@@ -1,3 +1,4 @@
+import { getAssetPath } from "../../utils/basePath";
 import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -13,14 +14,14 @@ import {
 
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  "./images/react2.webp",
-  "./images/next2.webp",
-  "./images/node2.webp",
-  "./images/express.webp",
-  "./images/mongo.webp",
-  "./images/mysql.webp",
-  "./images/typescript.webp",
-  "./images/javascript.webp",
+  getAssetPath("images/react2.webp"),
+  getAssetPath("images/next2.webp"),
+  getAssetPath("images/node2.webp"),
+  getAssetPath("images/express.webp"),
+  getAssetPath("images/mongo.webp"),
+  getAssetPath("images/mysql.webp"),
+  getAssetPath("images/typescript.webp"),
+  getAssetPath("images/javascript.webp"),
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
@@ -199,7 +200,7 @@ const TechStack = () => {
           ))}
         </Physics>
         <Environment
-          files={"./models/char_enviorment.hdr"}
+          files={getAssetPath("models/char_enviorment.hdr")}
           environmentIntensity={0.5}
           environmentRotation={[0, 4, 2]}
         />

@@ -1,3 +1,4 @@
+import { getAssetPath } from "../../utils/basePath";
 import * as THREE from "three";
 import { DRACOLoader, GLTF, GLTFLoader } from "three-stdlib";
 import { setCharTimeline, setAllTimeline } from "../../utils/GsapScroll";
@@ -10,14 +11,14 @@ const setCharacter = (
 ) => {
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("./draco/");
+  dracoLoader.setDecoderPath(getAssetPath("draco/"));
   loader.setDRACOLoader(dracoLoader);
 
   const loadCharacter = () => {
     return new Promise<GLTF | null>(async (resolve, reject) => {
       try {
         const encryptedBlob = await decryptFile(
-          "./models/character.enc?v=2",
+          getAssetPath("models/character.enc?v=2"),
           "MyCharacter12"
         );
         const blobUrl = URL.createObjectURL(new Blob([encryptedBlob]));
