@@ -85,6 +85,9 @@ export const navigationItems: NavigationItem[] = [
   { label: "Journey", href: "#journey" },
   { label: "Work", href: "#work" },
   { label: "Highlights", href: "#highlights" },
+  { label: "Research Papers", href: "#research-papers" },
+  { label: "Publications", href: "#publications" },
+  { label: "Medium", href: "https://medium.com/@farhankabir133" },
   { label: "Contact", href: "#contact" },
 ];
 

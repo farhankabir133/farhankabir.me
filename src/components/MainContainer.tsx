@@ -11,6 +11,7 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import ResearchPapers from "./ResearchPapers";
 import Publications from "./Publications";
+import PublicationShowcase from "./PublicationShowcase";
 import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
@@ -49,6 +50,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Highlights />
             <ResearchPapers />
             <Publications />
+            <PublicationShowcase />
             {isDesktopView && (
               <Suspense fallback={<div>Loading....</div>}>
                 <TechStack />
