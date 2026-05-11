@@ -11,10 +11,10 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import ResearchPapers from "./ResearchPapers";
 import Publications from "./Publications";
-import PublicationShowcase from "./PublicationShowcase";
 import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
+const PublicationShowcase = lazy(() => import("./PublicationShowcase"));
 
 const MainContainer = ({ children }: PropsWithChildren) => {
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
@@ -50,7 +50,9 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Highlights />
             <ResearchPapers />
             <Publications />
-            <PublicationShowcase />
+            <Suspense fallback={<div style={{ minHeight: "100vh" }} />}>
+              <PublicationShowcase />
+            </Suspense>
             {isDesktopView && (
               <Suspense fallback={<div>Loading....</div>}>
                 <TechStack />

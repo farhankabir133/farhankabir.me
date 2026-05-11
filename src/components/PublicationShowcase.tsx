@@ -15,6 +15,7 @@ const PublicationShowcase = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -24,7 +25,15 @@ const PublicationShowcase = () => {
   const cubesRef = useRef<THREE.Mesh[]>([]);
 
   useEffect(() => {
-    if (!canvasRef.current || !containerRef.current) return;
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!canvasRef.current || !containerRef.current || isMobile) return;
 
     const width = containerRef.current.clientWidth;
     const height = containerRef.current.clientHeight;
@@ -191,7 +200,7 @@ const PublicationShowcase = () => {
       <div className="showcase-container">
         <div className="showcase-content">
           <div className="showcase-canvas-wrapper" ref={containerRef}>
-            <canvas ref={canvasRef} className="showcase-canvas" />
+            {!isMobile && <canvas ref={canvasRef} className="showcase-canvas" />}
             <div className="showcase-overlay">
               <div className="showcase-text">
                 <h2 className="showcase-title">The Ink Home</h2>
