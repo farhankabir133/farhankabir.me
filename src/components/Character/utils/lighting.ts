@@ -1,4 +1,4 @@
-import { getAssetPath } from "../../utils/basePath";
+import { getAssetPath } from "../../../utils/basePath";
 import * as THREE from "three";
 import { RGBELoader } from "three-stdlib";
 import { gsap } from "gsap";

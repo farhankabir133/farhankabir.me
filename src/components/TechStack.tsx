@@ -1,4 +1,4 @@
-import { getAssetPath } from "../../utils/basePath";
+import { getAssetPath } from "../utils/basePath";
 import * as THREE from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
