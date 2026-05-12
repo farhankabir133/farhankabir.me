@@ -10,6 +10,25 @@ const Loading = ({ percent }: { percent: number }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [clicked, setClicked] = useState(false);
 
+  // Force timeout to complete loading if stuck (mobile fallback)
+  useEffect(() => {
+    const fallbackTimer = setTimeout(() => {
+      // If loading is still at low percent after 8 seconds, force completion
+      if (percent < 90) {
+        console.warn("Loading timeout - forcing completion for better UX");
+        // Simulate completion
+        if (!isLoaded) {
+          setLoaded(true);
+          setTimeout(() => {
+            setIsLoaded(true);
+          }, 1000);
+        }
+      }
+    }, 8000);
+
+    return () => clearTimeout(fallbackTimer);
+  }, [percent, isLoaded]);
+
   if (percent >= 100) {
     setTimeout(() => {
       setLoaded(true);
@@ -31,7 +50,7 @@ const Loading = ({ percent }: { percent: number }) => {
         }, 900);
       }
     });
-  }, [isLoaded]);
+  }, [isLoaded, setIsLoading]);
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     const { currentTarget: target } = e;

@@ -6,7 +6,10 @@ const CharacterModel = React.lazy(() => import("./Character"));
 
 const LazyCharacter = () => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const isVisible = useIntersectionObserver(ref, { threshold: 0.1 });
+  const isVisible = useIntersectionObserver(ref, {
+    threshold: 0.1,
+    rootMargin: "200px", // Start loading 200px before it comes into view
+  });
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
   const { setIsLoading } = useLoading();
 

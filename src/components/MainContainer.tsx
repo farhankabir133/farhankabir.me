@@ -38,7 +38,6 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       <Cursor />
       <Navbar />
       <SocialIcons />
-      {isDesktopView && children}
       <div id="smooth-wrapper">
         <div id="smooth-content">
           <div className="container-main">
@@ -61,6 +60,10 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Contact />
           </div>
         </div>
+      </div>
+      {/* Render children outside smooth scroll on desktop for IntersectionObserver */}
+      <div style={{ display: isDesktopView ? "block" : "none" }}>
+        {isDesktopView && children}
       </div>
     </div>
   );
