@@ -11,15 +11,14 @@ import WhatIDo from "./WhatIDo";
 import Work from "./Work";
 import ResearchPapers from "./ResearchPapers";
 import Publications from "./Publications";
-import PublicationShowcase from "./PublicationShowcase";
 import setSplitText from "./utils/splitText";
 
 const TechStack = lazy(() => import("./TechStack"));
 
 const MainContainer = ({ children }: PropsWithChildren) => {
-  const [isDesktopView, setIsDesktopView] = useState<boolean>(
-    window.innerWidth > 1024
-  );
+  const [isDesktopView, setIsDesktopView] = useState<boolean>(() => {
+    return window.innerWidth > 1024;
+  });
 
   useEffect(() => {
     const resizeHandler = () => {
@@ -31,7 +30,7 @@ const MainContainer = ({ children }: PropsWithChildren) => {
     return () => {
       window.removeEventListener("resize", resizeHandler);
     };
-  }, [isDesktopView]);
+  }, []);
 
   return (
     <div className="container-main">
@@ -50,7 +49,6 @@ const MainContainer = ({ children }: PropsWithChildren) => {
             <Highlights />
             <ResearchPapers />
             <Publications />
-            <PublicationShowcase />
             {isDesktopView && (
               <Suspense fallback={<div>Loading....</div>}>
                 <TechStack />

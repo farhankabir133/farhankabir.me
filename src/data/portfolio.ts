@@ -1,3 +1,5 @@
+import { getAssetPath } from "../utils/basePath";
+
 export type NavigationItem = {
   label: string;
   href: string;
@@ -70,7 +72,7 @@ export const siteProfile = {
     "My journey began with a curiosity about how things work, which led me to explore the intersection of technology and design. Today, I help businesses and startups bring their ideas to life through innovative web and mobile solutions.",
   aboutOutsideWork:
     "When I'm not coding or designing, you can find me exploring new technologies, contributing to open-source projects, or sharing knowledge with the developer community.",
-  resumeUrl: "https://farhankabir.me/Resume_final.pdf",
+  resumeUrl: getAssetPath("Akash_Malhotra.pdf"),
   primaryEmail: "farhankabir133@gmail.com",
   secondaryEmail: "hi@farhankabir.me",
   phone: "+880-1783165726",

@@ -4,7 +4,10 @@ import { smoother } from "../Navbar";
 
 export function initialFX() {
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
+  // Only unpause smoother on desktop where it exists
+  if (smoother) {
+    smoother.paused(false);
+  }
   document.getElementsByTagName("main")[0].classList.add("main-active");
   gsap.to("body", {
     backgroundColor: "#0a0e17",

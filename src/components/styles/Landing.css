@@ -189,7 +189,7 @@
   font-size: 28px;
   line-height: 28px;
   font-weight: 500;
-  font-family: "Geist", sans-serif;
+  font-family: "ABC Favorit", Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
 }
 
 .landing-info {
@@ -274,7 +274,7 @@ h2.landing-info-h2 {
   font-size: 42px;
   width: 120%;
   margin: 0;
-  font-family: "Geist", sans-serif;
+  font-family: "ABC Favorit", Avenir, Montserrat, Corbel, "URW Gothic", source-sans-pro, sans-serif;
   font-weight: 600;
   position: relative;
   margin-left: -5px;
@@ -282,6 +282,14 @@ h2.landing-info-h2 {
 
 .landing-h2-2 {
   position: absolute;
+  /* Hide old landing content on mobile - replaced by MobileLanding */
+  .landing-intro {
+    display: none !important;
+  }
+
+  .landing-info {
+    display: none !important;
+  }
   top: 0;
 }
 
@@ -319,6 +327,118 @@ h2.landing-info-h2 {
     font-size: 30px;
     line-height: 30px;
   }
+
+@media screen and (max-width: 1024px) {
+  .landing-section {
+    height: auto;
+    min-height: var(--vh);
+    padding-bottom: 32px;
+  }
+
+  .landing-container {
+    height: auto;
+    min-height: var(--vh);
+    padding-top: 110px;
+    box-sizing: border-box;
+  }
+
+  .landing-intro,
+  .landing-info {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    transform: none;
+  }
+
+  /* Hide old landing content on mobile - replaced by MobileLanding */
+  .landing-intro,
+  .landing-info {
+    display: none !important;
+  }
+
+
+  .landing-intro {
+    margin-bottom: 24px;
+  }
+
+  .landing-info {
+    margin-top: 20px;
+    padding-bottom: 24px;
+  }
+
+  .landing-copy {
+    max-width: 100%;
+    margin-left: 0;
+  }
+
+  .landing-cta {
+    margin-left: 0;
+  }
+
+  .character-model {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: min(72vh, 700px);
+    bottom: auto;
+    margin-top: 12px;
+  }
+
+  .character-lazy-shell,
+  .character-fallback {
+    width: 100%;
+    height: min(72vh, 700px);
+  }
+
+  .character-fallback {
+    border-radius: 28px;
+    background: radial-gradient(circle at 50% 30%, rgba(94, 234, 212, 0.18), transparent 45%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+    border: 1px solid rgba(94, 234, 212, 0.14);
+    box-shadow: 0 24px 80px rgba(10, 14, 23, 0.35);
+    margin-top: 12px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .landing-container {
+    width: calc(100% - 20px);
+    padding-top: 96px;
+  }
+
+  .landing-intro h1 {
+    font-size: 26px;
+    line-height: 26px;
+  }
+
+  h2.landing-info-h2 {
+    font-size: 30px;
+    width: 100%;
+  }
+
+  .landing-info h3 {
+    font-size: 16px;
+  }
+
+  .landing-copy {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .landing-cta a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .character-model,
+  .character-lazy-shell,
+  .character-fallback {
+    height: min(60vh, 520px);
+  }
+}
 
   .landing-info h2 {
     font-size: 35px;

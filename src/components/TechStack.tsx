@@ -13,25 +13,16 @@ import {
   RapierRigidBody,
 } from "@react-three/rapier";
 
-import reactImg from "/images/react2.webp";
-import nextImg from "/images/next2.webp";
-import nodeImg from "/images/node2.webp";
-import expressImg from "/images/express.webp";
-import mongoImg from "/images/mongo.webp";
-import mysqlImg from "/images/mysql.webp";
-import typescriptImg from "/images/typescript.webp";
-import javascriptImg from "/images/javascript.webp";
-
 const textureLoader = new THREE.TextureLoader();
 const imageUrls = [
-  reactImg,
-  nextImg,
-  nodeImg,
-  expressImg,
-  mongoImg,
-  mysqlImg,
-  typescriptImg,
-  javascriptImg,
+  getAssetPath("images/react2.webp"),
+  getAssetPath("images/next2.webp"),
+  getAssetPath("images/node2.webp"),
+  getAssetPath("images/express.webp"),
+  getAssetPath("images/mongo.webp"),
+  getAssetPath("images/mysql.webp"),
+  getAssetPath("images/typescript.webp"),
+  getAssetPath("images/javascript.webp"),
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 

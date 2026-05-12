@@ -19,12 +19,25 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(0);
 
+  useEffect(() => {
+    if (window.innerWidth <= 1024) {
+      const mobileFallback = window.setTimeout(() => {
+        setLoading(100);
+      }, 800);
+
+      return () => {
+        window.clearTimeout(mobileFallback);
+      };
+    }
+
+    return undefined;
+  }, []);
+
   const value = {
     isLoading,
     setIsLoading,
     setLoading,
   };
-  useEffect(() => {}, [loading]);
 
   return (
     <LoadingContext.Provider value={value as LoadingType}>
