@@ -1,6 +1,7 @@
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import React, { Suspense, useRef, useEffect } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { useLoading } from "../context/LoadingProvider";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 
 const CharacterModel = React.lazy(() => import("./Character"));
 
@@ -10,16 +11,11 @@ const LazyCharacter = () => {
     threshold: 0.1,
     rootMargin: "200px", // Start loading 200px before it comes into view
   });
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 1024);
+  
+  // Use proper media query hook for responsive detection
+  // useMediaQuery handles window resize automatically
+  const isMobile = useMediaQuery("(max-width: 1023px)");
   const { setIsLoading } = useLoading();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   // On mobile, complete loading immediately and skip 3D character
   useEffect(() => {

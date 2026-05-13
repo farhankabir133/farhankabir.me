@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useMediaQuery } from "../hooks/useMediaQuery";
 import "./styles/PublicationShowcase.css";
 
 interface Particle {
@@ -15,7 +16,11 @@ const PublicationShowcase = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+  // Use proper media query hook for responsive detection
+  // Tablet breakpoint: don't render 3D on tablets and smaller
+  const isMobile = useMediaQuery("(max-width: 1023px)");
+  
   const particlesRef = useRef<Particle[]>([]);
   const animationRef = useRef<number>();
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -23,14 +28,6 @@ const PublicationShowcase = () => {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const groupRef = useRef<THREE.Group | null>(null);
   const cubesRef = useRef<THREE.Mesh[]>([]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     if (!canvasRef.current || !containerRef.current || isMobile) return;
